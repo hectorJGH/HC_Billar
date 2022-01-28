@@ -93,7 +93,7 @@ void fillinfo(std::vector<double> & infovec, double vxo,double vyo,double xo,dou
 	infovec[5*(choques)+1]=yo;
 	infovec[5*(choques)+2]=vxo;
 	infovec[5*(choques)+3]=vyo;
-	infovec[5*(choques)+4]=infovec[6*choques-1]+dt;
+	infovec[5*(choques)+4]=infovec[5*choques-1]+dt;
 }
 
 void posiciones_choque(double & xo, double & yo, double vxo, double vyo, double alpha){
