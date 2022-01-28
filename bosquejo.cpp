@@ -7,27 +7,27 @@ double line(double xo, double yo, double vxo, double vyo, double x);
 double delta(double speed,double xo, double yo, double x1, double y1);
 
 
-void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double & xo,double & yo,int & choques,double totaltime,double alpha); 
+void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double & xo,double & yo,int & choques,double totaltime,double alpha);
 void posiciones_choque(double & xo, double & yo, double vxo, double vyo, double alpha);
 void velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, double alpha);
 void fillinfo(std::vector<double> & infovec, double vxo,double vyo,double xo,double yo,double dt,int choques);
 
 int main(int argc, char *argv[]){
 
-  double xo=0;//std::atoi(argv[1]);
-    double yo=0;//std::atoi(argv[2]);
-  double vxo= 0.8;//std::atoi(argv[3]); //Tengo problemas cuendo meto decimales al atoi
-    double vyo=0.8;//std::atoi(argv[4]);
-  double alpha=0.01;//std::atoi(argv[5]);
-  double totaltime= 50;//std::atoi(argv[6]);
-  
+  double xo=std::atof(argv[1]);//std::atoi(argv[1]);
+    double yo=std::atof(argv[2]);//std::atoi(argv[2]);
+  double vxo= std::atof(argv[3]);//std::atoi(argv[3]); //Tengo problemas cuendo meto decimales al atoi
+    double vyo=std::atof(argv[4]);//std::atoi(argv[4]);
+  double alpha=std::atof(argv[5]);//std::atoi(argv[5]);
+  double totaltime= std::atof(argv[6]);//std::atoi(argv[6]);
+
   std::vector<double> infovec{0};
-  infovec.resize(6);
+  infovec.resize(5);
   int choques=0;
   reflexiones(infovec,vxo,vyo,xo,yo,choques,totaltime,alpha);
 
   for(int ii=0;ii<=choques;++ii){
-    std::cout<<infovec[6*ii]<<"\t"<<infovec[6*ii+1]<<"\t"<<infovec[6*ii+2]<<"\t"<<infovec[6*ii+3]<<"\n";
+    std::cout<<infovec[5*ii]<<"\t"<<infovec[5*ii+1]<<"\t"<<infovec[5*ii+2]<<"\t"<<infovec[5*ii+3]<<"\t"<<infovec[5*ii+4]<<"\n";
   }
 
   return 0;
@@ -52,7 +52,7 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
 	xo=1;
 	yo=line(xo,yo,vxo,vyo,1);
 	vxo=-vxo;
-	fillinfo(infovec,vxo,vyo,xo,yo,dt,choques);	
+	fillinfo(infovec,vxo,vyo,xo,yo,dt,choques);
       }
       else{//toca el semicirculo superior o inferior
 	double xinicial=xo;//guardo las posiciones viejas
@@ -72,7 +72,7 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
 	xo=-1;
 	yo=line(xo,yo,vxo,vyo,-1);
 	vxo=-vxo;
-	fillinfo(infovec,vxo,vyo,xo,yo,dt,choques);	
+	fillinfo(infovec,vxo,vyo,xo,yo,dt,choques);
       }
       else{//toca el semicirculo inferior o superior
 	double xinicial=xo;//guardo las posiciones viejas
@@ -88,13 +88,12 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
 }
 
 void fillinfo(std::vector<double> & infovec, double vxo,double vyo,double xo,double yo,double dt,int choques){
-        infovec.resize(6*(choques+1));
-	infovec[6*choques-1]=infovec[6*choques-2]+dt;
-	infovec[6*(choques)]=xo;
-	infovec[6*(choques)+1]=yo;
-	infovec[6*(choques)+2]=vxo;
-	infovec[6*(choques)+3]=vyo;
-	infovec[6*(choques)+4]=infovec[6*choques-1];
+        infovec.resize(5*(choques+1));
+	infovec[5*(choques)]=xo;
+	infovec[5*(choques)+1]=yo;
+	infovec[5*(choques)+2]=vxo;
+	infovec[5*(choques)+3]=vyo;
+	infovec[5*(choques)+4]=infovec[6*choques-1]+dt;
 }
 
 void posiciones_choque(double & xo, double & yo, double vxo, double vyo, double alpha){
