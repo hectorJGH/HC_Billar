@@ -56,6 +56,46 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
   }
 }
 
+void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<double> k, double time, double delta_t)
+{
+  double t=0.0;
+  int ii = 0, jj = 0, kk = 0;
+  while(t<time)
+  {
+    if(t < m[ii*5 + 4])
+    {
+      if(t < n[jj*5 + 4])
+      {
+        k[kk] = t;
+        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+      }
+      else
+      {
+        ++jj;
+        k[kk] = t;
+        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+      }
+    }
+    else
+    {
+      ++ii;
+      if(t < n[jj*5 + 4])
+      {
+        k[kk] = t;
+        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+      }
+      else
+      {
+        ++jj;
+        k[kk] = t;
+        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+      }
+    }
+    kk+=2;
+    t+=delta_t;
+  }
+}
+
 void fillinfo(std::vector<double> & infovec, double vxo,double vyo,double xo,double yo,double dt,int choques){
         infovec.resize(5*(choques+1));
 	infovec[5*(choques)]=xo;
