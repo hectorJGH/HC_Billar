@@ -67,13 +67,13 @@ void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<doubl
       if(t < n[jj*5 + 4])
       {
         k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 4] - n[jj*5 + 1], 2));
       }
       else
       {
         ++jj;
         k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(n[jj*5 + 1] - m[ii*5 + 4], 2));
       }
     }
     else
@@ -82,13 +82,13 @@ void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<doubl
       if(t < n[jj*5 + 4])
       {
         k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 4] - n[jj*5 + 1], 2));
       }
       else
       {
         ++jj;
         k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5], 2) + std::pow(n[jj*5 + 1], 2));
+        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 4] - n[jj*5 + 1], 2));
       }
     }
     kk+=2;
