@@ -58,7 +58,7 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
 }
 
 //m y n son infovec's de la forma [x,y,vx,vy,t,...] que registran los choques. k=[t,d,...] registra el tiempo y la distancia para diferencias de tiempo delta_t
-void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<double> k, double time, double delta_t)
+void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<double> & k, double time, double delta_t)
 {
   double t=0.0;
   int ii = 0, jj = 0, kk = 0;
@@ -66,14 +66,15 @@ void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<doubl
   while(t<time)
   {
     while (t >= m[(ii+1)*5 + 4]) ii++;//El tiempo m[(ii+1)*5 + 4] la primera cota superior del tiempo t, de manera que en ii hay una cota inferior
-    while (t >= n[(jj+1)*5 + 4]) jj++;
+    while (t >= n[(jj+1)*5 + 4]) jj++;//tjj < t < t(jj+1)
     xm = m[ii*5] + (t-m[ii*5 + 4]) *m[ii*5 + 2];
     ym = m[ii*5 + 1] + (t-m[ii*5 + 4]) *m[ii*5 + 3];
-    xn = n[ii*5] + (t-n[ii*5 + 4]) *n[ii*5 + 2];
-    yn = n[ii*5 + 1] + (t-n[ii*5 + 4]) *n[ii*5 + 3];
-    k[kk*2 + 1] = std::sqrt(std::pow(xm - xn, 2) + std::pow(ym - yn, 2));
+    xn = n[jj*5] + (t-n[jj*5 + 4]) *n[jj*5 + 2];
+    yn = n[jj*5 + 1] + (t-n[jj*5 + 4]) *n[jj*5 + 3];
+    //k.resize(2*(kk+1));
+    k[kk*2 + 1] += std::sqrt(std::pow(xm - xn, 2) + std::pow(ym - yn, 2));
     k[kk*2] = t;
-    kk++;
+    kk+=1;
     t+=delta_t;
   }
 }
