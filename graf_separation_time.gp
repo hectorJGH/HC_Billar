@@ -10,6 +10,6 @@ set dummy t
 Fexp(t) = A* exp(la *t)
 A = 1E-5
 la = 0.01
-fit Fexp(t) 'separation.txt' via A, la
+fit Fexp(t) '0.txt' via A, la
 
-plot 'separation.txt' u 1:2 w lp pt 7 lc rgb 'red' t 'Data', Fexp(t) lw 3 lc rgb 'black' t 'Least squares fit'
+plot '0.txt' u 1:2 w lp pt 7 lc rgb 'red' t 'Data', Fexp(t) lw 3 lc rgb 'black' t 'Least squares fit'
