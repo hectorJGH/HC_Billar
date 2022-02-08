@@ -57,44 +57,23 @@ void reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double
   }
 }
 
-//m y n son infovec's de la forma [x,y,vx,vy,t,...] que registran los choques. k=[t,d,...] registra el tiempo y la distancia entre choques
-//por modificar, pues se necesita la distancia en general, no solo entre choques
+//m y n son infovec's de la forma [x,y,vx,vy,t,...] que registran los choques. k=[t,d,...] registra el tiempo y la distancia para diferencias de tiempo delta_t
 void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<double> k, double time, double delta_t)
 {
   double t=0.0;
   int ii = 0, jj = 0, kk = 0;
+  double xm, ym, xn, yn;
   while(t<time)
   {
-    if(t < m[ii*5 + 4])
-    {
-      if(t < n[jj*5 + 4])
-      {
-        k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 1] - n[jj*5 + 1], 2));
-      }
-      else
-      {
-        ++jj;
-        k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(n[jj*5 + 1] - m[ii*5 + 1], 2));
-      }
-    }
-    else
-    {
-      ++ii;
-      if(t < n[jj*5 + 4])
-      {
-        k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 1] - n[jj*5 + 1], 2));
-      }
-      else
-      {
-        ++jj;
-        k[kk] = t;
-        k[kk+1] = std::sqrt(std::pow(m[ii*5] - n[jj*5], 2) + std::pow(m[ii*5 + 1] - n[jj*5 + 1], 2));
-      }
-    }
-    kk+=2;
+    while (t >= m[(ii+1)*5 + 4]) ii++;//El tiempo m[(ii+1)*5 + 4] la primera cota superior del tiempo t, de manera que en ii hay una cota inferior
+    while (t >= n[(jj+1)*5 + 4]) jj++;
+    xm = m[ii*5] + (t-m[ii*5 + 4]) *m[ii*5 + 2];
+    ym = m[ii*5 + 1] + (t-m[ii*5 + 4]) *m[ii*5 + 3];
+    xn = n[ii*5] + (t-n[ii*5 + 4]) *n[ii*5 + 2];
+    yn = n[ii*5 + 1] + (t-n[ii*5 + 4]) *n[ii*5 + 3];
+    k[kk*2 + 1] = std::sqrt(std::pow(xm - xn, 2) + std::pow(ym - yn, 2));
+    k[kk*2] = t;
+    kk++;
     t+=delta_t;
   }
 }
