@@ -119,6 +119,42 @@ void velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, doubl
     vyo+=circle(xo)*escalar;
   }
 }
+void elipse_reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double & xo,double & yo,int & choques,double totaltime,double alpha){
+  
+  int simtime=0;
+  double dt=0;
+  double speed=std::sqrt(std::pow(vxo,2)+std::pow(vyo,2));
+  infovec[0]=xo;
+  infovec[1]=yo;
+  infovec[2]=vxo;
+  infovec[3]=vyo;
+  infovec[4]=0;
+  while(simtime<totaltime){
+    choques+=1;
+    double xinicial=xo;//guardo las posiciones viejas
+    double yinicial=yo;
+    elipse_posiciones_choque(xo,yo,vxo,vyo,alpha);//actualiza a las coordenadas del punto de choque(tiene en cuenta el vx para el signo)
+    dt=delta(speed,xinicial,yinicial,xo,yo);//calcula el nuevo delta t
+    elipse_velocidad_reflejada(xo,yo,vxo,vyo,alpha);//actualiza las velocidad a la reflejada
+    simtime+=dt;
+    fillinfo(infovec,vxo,vyo,xo,yo,dt,choques);
+  }
+}
+void elipse_posiciones_choque(double & xo, double & yo, double vxo, double vyo, double alpha){
+  double m=vyo/vxo;
+  double b=yo-m*xo;
+    
+    double root= std::sqrt(std::pow(2*m*(b/std::pow(alpha,2)),2)-4*(std::pow(b/alpha,2)-1)*(1+std::pow(m/alpha,2)));//raiz del discriminante
+    if(if vx<0)root=-root;//si va a la izquierda, tome la solución mas pequeña
+    xo=(-m*(b/std::(alpha,2))/((std::pow(m/alpha,2)+1)))+(root/(2*(std::pow(m/alpha,2)+1)));//posicion en x
+  
+  yo=m*xo+b;
+}
+void elipse_velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, double alpha){
+  double escalar=-2*((alpha*xo*vxo)+(yo*vyo/alpha))/(1+(std::pow(alpha,2)-1)*(std::pow(xo,2)));
+  vxo+=alpa*xo*escalar;
+  vyo+=yo**escalar/alpha;
+}
 
 //Posicion y de la colision para paredes verticales
 double line(double xo, double yo, double vxo, double vyo, double x){

@@ -15,5 +15,7 @@ void posiciones_choque(double & xo, double & yo, double vxo, double vyo, double 
 void velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, double alpha);
 void fillinfo(std::vector<double> & infovec, double vxo,double vyo,double xo,double yo,double dt,int choques);
 void d_balls(std::vector<double> & m, std::vector<double> & n, std::vector<double> & k, double time, double delta_t);
-
+void elipse_reflexiones(std::vector<double> & infovec, double & vxo,double & vyo,double & xo,double & yo,int & choques,double totaltime,double alpha);
+void elipse_posiciones_choque(double & xo, double & yo, double vxo, double vyo, double alpha);
+void elipse_velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, double alpha);  
 #endif
