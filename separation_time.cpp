@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
   double delta=0.1;
 
   //double speed = 0.0;
-  double x=-1.0E-5, y=0.0, vx=0.6, vy=0.0;
+  double x=-1.0E-7, y=0.0, vx=0.6, vy=0.6;
 
   std::vector<double> infovec1{0}, infovec2{0}, separvec{0};
   infovec1.resize(5);
@@ -28,12 +28,12 @@ int main(int argc, char *argv[]){
   int choques=0;
   reflexiones(infovec1,vx,vy,x,y,choques,totaltime,alpha);
   
-  int Nb = 10;
+  int Nb = 1000;
   for (int ii = 0; ii<Nb; ii++) {
-      x = (ii+1)*1E-5;
+      x = (ii+1)*1E-7;
       y = 0.0;
       vx = 0.6;
-      vy = 0.0;
+      vy = 0.6;
       choques = 0;
       reflexiones(infovec2,vx,vy,x,y,choques,totaltime,alpha);
       d_balls(infovec1, infovec2, separvec, totaltime, 0.1);
