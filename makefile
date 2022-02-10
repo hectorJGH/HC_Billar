@@ -27,5 +27,11 @@ elipse_billiard.txt: elipse_billiard.x
 graph_elipse_billiard.png: graf_elipse_billiard.gp elipse_billiard.txt
 	gnuplot $<
 
+elipse_separation_time.x: elipse_separation_time.cpp billiard.h billiard.cpp
+	g++ -fsanitize=address -fsanitize=undefined -fsanitize=leak $< billiard.h billiard.cpp -o $@
+
+elipse_separation: elipse_separation_time.x
+	./$< 1.01
+
 clean: *.txt *.png *.x *.log
 	rm *.txt *.png *.x *.log
