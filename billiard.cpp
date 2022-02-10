@@ -145,15 +145,15 @@ void elipse_posiciones_choque(double & xo, double & yo, double vxo, double vyo, 
   double b=yo-m*xo;
     
     double root= std::sqrt(std::pow(2*m*(b/std::pow(alpha,2)),2)-4*(std::pow(b/alpha,2)-1)*(1+std::pow(m/alpha,2)));//raiz del discriminante
-    if(if vx<0)root=-root;//si va a la izquierda, tome la solución mas pequeña
-    xo=(-m*(b/std::(alpha,2))/((std::pow(m/alpha,2)+1)))+(root/(2*(std::pow(m/alpha,2)+1)));//posicion en x
+    if(vxo<0)root=-root;//si va a la izquierda, tome la solución mas pequeña
+    xo=(-m*(b/std::pow(alpha,2))/((std::pow(m/alpha,2)+1)))+(root/(2*(std::pow(m/alpha,2)+1)));//posicion en x
   
   yo=m*xo+b;
 }
 void elipse_velocidad_reflejada(double xo, double yo, double & vxo, double & vyo, double alpha){
   double escalar=-2*((alpha*xo*vxo)+(yo*vyo/alpha))/(1+(std::pow(alpha,2)-1)*(std::pow(xo,2)));
-  vxo+=alpa*xo*escalar;
-  vyo+=yo**escalar/alpha;
+  vxo+=alpha*xo*escalar;
+  vyo+=yo*escalar/alpha;
 }
 
 //Posicion y de la colision para paredes verticales
