@@ -15,8 +15,8 @@ separation_time.x: separation_time.cpp billiard.h billiard.cpp
 separation: separation_time.x
 	./$< 0.01
 
-graph_separation_time.png: graf_separation_time.gp separation.txt
-	gnuplot $<
+graphs_separation_time: ajustes.sh graf_separation_time.gp separation_time.x
+	bash $<
 
 elipse_billiard.x: elipse_billiard_main.cpp billiard.h billiard.cpp
 	g++ -fsanitize=address -fsanitize=undefined -fsanitize=leak $< billiard.h billiard.cpp -o $@
