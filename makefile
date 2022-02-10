@@ -33,5 +33,5 @@ elipse_separation_time.x: elipse_separation_time.cpp billiard.h billiard.cpp
 elipse_separation: elipse_separation_time.x
 	./$< 1.01
 
-clean: *.txt *.png *.x *.log
+clean:
 	rm *.txt *.png *.x *.log
